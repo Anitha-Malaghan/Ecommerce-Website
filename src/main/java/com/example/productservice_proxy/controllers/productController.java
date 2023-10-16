@@ -4,6 +4,8 @@ import com.example.productservice_proxy.dtos.ProductDto;
 import com.example.productservice_proxy.models.Product;
 import com.example.productservice_proxy.services.ProductService;
 import com.example.productservice_proxy.services.ProductServiceInterface;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
@@ -24,9 +26,10 @@ public class productController {
 
     @GetMapping("/{productId}")
     // get the product
-    public Product getSingleProduct(@PathVariable("productId") Long productId){
+    public ResponseEntity<Product> getSingleProduct(@PathVariable("productId") Long productId){
         Product product = this.productService.getSingleProduct(productId);
-        return product;
+        ResponseEntity<Product> responseEntity = new ResponseEntity<>(product, HttpStatus.OK);
+        return responseEntity;
     }
 
     @PostMapping("/{productId}")
