@@ -2,7 +2,6 @@ package com.example.productservice_proxy.controllers;
 
 import com.example.productservice_proxy.dtos.ProductDto;
 import com.example.productservice_proxy.models.Product;
-import com.example.productservice_proxy.services.ProductService;
 import com.example.productservice_proxy.services.ProductServiceInterface;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -28,8 +27,8 @@ public class productController {
     // get the product
     public ResponseEntity<Product> getSingleProduct(@PathVariable("productId") Long productId){
         Product product = this.productService.getSingleProduct(productId);
-        ResponseEntity<Product> responseEntity = new ResponseEntity<>(product, HttpStatus.OK);
-        return responseEntity;
+        /*sponseEntity<Product> responseEntity = new ResponseEntity<>(product, HttpStatus.OK);
+        return responseEntity;*/ return ResponseEntity.ok(product);
     }
 
     @PostMapping("/{productId}")
