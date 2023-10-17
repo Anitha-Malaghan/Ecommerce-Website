@@ -1,5 +1,6 @@
 package com.example.productservice_proxy.controllers;
 
+import com.example.productservice_proxy.clients.ClientProductDtoInterface;
 import com.example.productservice_proxy.dtos.ProductDto;
 import com.example.productservice_proxy.models.Product;
 import com.example.productservice_proxy.services.ProductServiceInterface;
@@ -51,7 +52,7 @@ public class ProductController {
     }
 
     @PostMapping()
-    public ResponseEntity<Product> addNewProduct(@RequestBody ProductDto productDto){
+    public ResponseEntity<Product> addNewProduct(@RequestBody ClientProductDtoInterface productDto){
         Product product = this.productService.addNewProduct(productDto);
         ResponseEntity<Product> responseEntity = new ResponseEntity<>(product, HttpStatus.OK);
         return responseEntity;
