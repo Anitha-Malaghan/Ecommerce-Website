@@ -13,7 +13,9 @@ public interface ProductServiceInterface {
 
     Product addNewProduct(ClientProductDtoInterface productDto);
 
-    String updateProduct(Long productId);
+    Product updateProduct(Long productId, Product product);
+
+
 
     String deleteProduct(Long productId);
 }

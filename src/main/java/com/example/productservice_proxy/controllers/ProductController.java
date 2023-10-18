@@ -2,6 +2,7 @@ package com.example.productservice_proxy.controllers;
 
 import com.example.productservice_proxy.clients.ClientProductDtoInterface;
 import com.example.productservice_proxy.dtos.ProductDto;
+import com.example.productservice_proxy.models.Categories;
 import com.example.productservice_proxy.models.Product;
 import com.example.productservice_proxy.services.ProductServiceInterface;
 import org.springframework.http.HttpStatus;
@@ -9,6 +10,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.util.LinkedMultiValueMap;
 import org.springframework.util.MultiValueMap;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.client.RestTemplate;
 
 import java.util.List;
 
@@ -18,7 +20,9 @@ public class ProductController {
 
     ProductServiceInterface productService;
 
+//constructor
     public ProductController(ProductServiceInterface productService){
+
         this.productService=productService;
     }
 
@@ -54,6 +58,7 @@ public class ProductController {
     @PostMapping()
     public ResponseEntity<Product> addNewProduct(@RequestBody ClientProductDtoInterface productDto){
         Product product = this.productService.addNewProduct(productDto);
+        //why conversion here from product to responseEntity?
         ResponseEntity<Product> responseEntity = new ResponseEntity<>(product, HttpStatus.OK);
         return responseEntity;
 
@@ -61,8 +66,15 @@ public class ProductController {
 
     @PatchMapping("/{productId}")
     //The PUT method is used to update an entire resource or create a new resource if it doesn't exist at the specified URI.
-    public String updateOrCreateProduct(@PathVariable("productId") Long productId  ){
-        return "updating product";
+    public Product patchProduct(@PathVariable("productId") Long productId, @RequestBody ProductDto productDto  ){
+       Product product = new Product();
+       product.setId(productDto.getId());
+       product.setCategory(new Categories());
+       product.getCategory().setName(productDto.getCategory());
+       product.setTitle(productDto.getTitle());
+       product.setPrice(productDto.getPrice());
+       product.setDescription(productDto.getDescription());
+       return this.productService.updateProduct(productId, product);
 
     }
 

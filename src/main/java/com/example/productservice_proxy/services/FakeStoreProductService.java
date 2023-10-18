@@ -5,10 +5,18 @@ import com.example.productservice_proxy.clients.fakestore.dto.FakeStoreProductDt
 import com.example.productservice_proxy.dtos.ProductDto;
 import com.example.productservice_proxy.models.Categories;
 import com.example.productservice_proxy.models.Product;
+import io.micrometer.common.lang.Nullable;
 import org.springframework.boot.web.client.RestTemplateBuilder;
+import org.springframework.http.HttpMethod;
 import org.springframework.http.ResponseEntity;
+import org.springframework.http.client.HttpComponentsClientHttpRequestFactory;
 import org.springframework.stereotype.Service;
+import org.springframework.web.client.RequestCallback;
+import org.springframework.web.client.ResponseExtractor;
+import org.springframework.web.client.RestClientException;
 import org.springframework.web.client.RestTemplate;
+
+
 
 import java.util.ArrayList;
 import java.util.List;
@@ -21,6 +29,17 @@ public class FakeStoreProductService implements ProductServiceInterface {
 
         this.restTemplateBuilder = restTemplateBuilder;
     }
+
+    private <T> ResponseEntity<T> requestForEntity(HttpMethod httpMethod, String url, @Nullable Object request,
+                                                   Class<T> responseType, Object... uriVariables) throws RestClientException {
+        RestTemplate restTemplate = restTemplateBuilder.requestFactory(
+                HttpComponentsClientHttpRequestFactory.class
+        ).build();
+        RequestCallback requestCallback =restTemplate.httpEntityCallback(request, responseType);
+        ResponseExtractor<ResponseEntity<T>> responseExtractor = restTemplate.responseEntityExtractor(responseType);
+        return restTemplate.execute(url, httpMethod, requestCallback, responseExtractor, uriVariables);
+    }
+
 
 
 
@@ -72,15 +91,35 @@ public class FakeStoreProductService implements ProductServiceInterface {
         return product;
 
     }
-    @Override
-    public String updateProduct(Long productId){
-        return null;
-    }
 
+
+    @Override
+    public Product updateProduct(Long productId, Product product){
+        RestTemplate restTemplate = restTemplateBuilder.build();
+        FakeStoreProductDto fakeStoreProductDto = new FakeStoreProductDto();
+        fakeStoreProductDto.setDescription(product.getDescription());
+        fakeStoreProductDto.setImage(product.getImageUrl());
+        fakeStoreProductDto.setPrice(product.getPrice());
+        fakeStoreProductDto.setTitle(product.getTitle());
+        fakeStoreProductDto.setCategory(product.getCategory().getName());
+
+        ResponseEntity<FakeStoreProductDto> fakeStoreProductDtoResponseEntity
+                =  requestForEntity(
+                        HttpMethod.PATCH,
+                "https://fakestoreapi.com/products/{id}",
+                fakeStoreProductDto,
+                FakeStoreProductDto.class,
+                productId
+        );
+
+    FakeStoreProductDto fakeStoreProductDto1 = fakeStoreProductDtoResponseEntity.getBody();
+    return getProduct(fakeStoreProductDto);
+}
     @Override
     public  String deleteProduct(Long productId){
         return null;
     }
+    //transformer method for fakestoreproductdto to product
     private Product getProduct(FakeStoreProductDto productDto) {
         Product product = new Product();
         product.setId(productDto.getId());
