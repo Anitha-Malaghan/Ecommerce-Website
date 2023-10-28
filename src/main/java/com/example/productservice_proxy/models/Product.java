@@ -19,4 +19,5 @@ public class Product extends BaseModel{
     private Categories category;
     private String imageUrl;
     private  Boolean isPublic;
+    private int numberOfUnits;
 }
