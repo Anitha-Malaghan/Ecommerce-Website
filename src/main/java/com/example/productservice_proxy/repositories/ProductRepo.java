@@ -16,5 +16,11 @@ public interface ProductRepo extends JpaRepository<Product, Long> {
    // String findTitleById(Long id);
     List<Product> findAll();
 
+    //List<Product> findByIdIsNotNullOrderByPrice();
+    List<Product>findByPriceIsNotNullOrderByPrice();
+
+    // I can get tall the value which are public.this works for boolean only.
+    List<Product> findAllByIsPublicTrue();
+
 
 }

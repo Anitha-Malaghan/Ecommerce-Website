@@ -118,6 +118,8 @@ class ProductRepoTest {
         //List<Product> productList = productRepo.findAll();
 
         //String s = productRepo.findTitleById(202l);
+        //List<Product> productList = productRepo.findByIdIsNotNullOrderByPrice();
+        List<Product> productList = productRepo.findByPriceIsNotNullOrderByPrice();
         System.out.println("Debug");
         /*Product product = new Product();
         product.setPrice(1012);
