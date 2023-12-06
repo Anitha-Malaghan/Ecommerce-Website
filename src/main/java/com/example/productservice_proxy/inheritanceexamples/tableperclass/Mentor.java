@@ -1,4 +1,4 @@
-package com.example.productservice_proxy.inheritanceexamples.tableperclass.tableperclass;
+package com.example.productservice_proxy.inheritanceexamples.tableperclass;
 
 import jakarta.persistence.Entity;
 

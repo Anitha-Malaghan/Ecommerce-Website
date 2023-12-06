@@ -65,6 +65,7 @@ class ProductRepoTest {
         Categories categories = new Categories();
         categories.setName("Fashion");
         categories.setDescription("Fashion");
+        //I'm not saving the category
         //categories = categoryRepo.save(categories);
 
 
@@ -80,7 +81,7 @@ class ProductRepoTest {
 
     }
     @Test
-    // if you are using @transactional at the test it is not going to save the data
+    // if you are using @transactional at the spring test it is not going to save the data
     @Transactional
     // you can save by making @Rollback(value = false)
     @Rollback(value = false)
@@ -114,6 +115,7 @@ class ProductRepoTest {
 
        // Product product = productRepo.findProductById(202L);
 
+        // including the endpoints
         //Product product = productRepo.findByPriceBetween(1000, 1100);
         //List<Product> productList = productRepo.findAll();
 

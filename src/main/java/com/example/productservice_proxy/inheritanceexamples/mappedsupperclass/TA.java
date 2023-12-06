@@ -1,4 +1,4 @@
-package com.example.productservice_proxy.inheritanceexamples.tableperclass.mappedsupperclass;
+package com.example.productservice_proxy.inheritanceexamples.mappedsupperclass;
 
 import jakarta.persistence.Entity;
 

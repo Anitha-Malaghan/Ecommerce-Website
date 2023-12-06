@@ -1,4 +1,4 @@
-package com.example.productservice_proxy.inheritanceexamples.tableperclass.singleclass;
+package com.example.productservice_proxy.inheritanceexamples.singleclass;
 
 import jakarta.persistence.DiscriminatorValue;
 import jakarta.persistence.Entity;

@@ -1,4 +1,4 @@
-package com.example.productservice_proxy.inheritanceexamples.tableperclass.mappedsupperclass;
+package com.example.productservice_proxy.inheritanceexamples.joinedtable;
 
 import jakarta.persistence.*;
 import lombok.Getter;
@@ -7,7 +7,9 @@ import lombok.Setter;
 
 @Getter
 @Setter
-@MappedSuperclass
+@Entity(name = "jt_user")
+@Inheritance(strategy = InheritanceType.JOINED)
+
 public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
