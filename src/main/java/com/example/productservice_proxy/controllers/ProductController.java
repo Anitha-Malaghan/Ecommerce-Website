@@ -28,25 +28,26 @@ public class ProductController {
     }
 
     @GetMapping("")
-    public ResponseEntity<List<Product>> getAllProducts(){
+    public ResponseEntity<List<Product>> getAllProducts() {
         return new ResponseEntity<>(this.productService.getAllProducts(), HttpStatus.OK);
-
     }
 
     @GetMapping("/{productId}")
     // get the product
     public ResponseEntity<Product> getSingleProduct(@PathVariable("productId") Long productId){
         try {
-            MultiValueMap<String, String> headers = new LinkedMultiValueMap<>();
+            /*MultiValueMap<String, String> headers = new LinkedMultiValueMap<>();
             headers.add("Accept","application/json");
             headers.add("Content-type","application/json");
-            headers.add("auth-token", "heyaccess");
+            headers.add("auth-token", "heyaccess");*/
+
+
             Product product = this.productService.getSingleProduct(productId);
             if(productId < 1){
                 throw new IllegalArgumentException("Something went wrong");
             }
             /*return ResponseEntity.ok(product); */
-        ResponseEntity<Product> responseEntity = new ResponseEntity<>(product,headers, HttpStatus.OK);
+        ResponseEntity<Product> responseEntity = new ResponseEntity<>(product, HttpStatus.OK);
         return responseEntity;
         }
         catch(Exception e){

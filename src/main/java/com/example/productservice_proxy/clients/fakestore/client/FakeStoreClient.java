@@ -13,6 +13,7 @@ import java.util.List;
 public class FakeStoreClient {
     private RestTemplateBuilder restTemplateBuilder;
     public FakeStoreClient(RestTemplateBuilder restTemplateBuilder){
+
         this.restTemplateBuilder = restTemplateBuilder;
     }
 
