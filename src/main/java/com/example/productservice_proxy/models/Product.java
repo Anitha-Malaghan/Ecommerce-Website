@@ -14,10 +14,10 @@ public class Product extends BaseModel{
     private String title;
     private double price;
     private String description;
-    // by default it is eager loading
-    @ManyToOne(cascade = CascadeType.ALL)
-    private Categories category;
     private String imageUrl;
+    // by default it is eager loading
+    @ManyToOne(cascade = CascadeType.ALL )
+    private Categories category;
     private  Boolean isPublic;
     private int numberOfUnits;
 }

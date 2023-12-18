@@ -10,7 +10,7 @@ import java.util.List;
 public interface ProductRepo extends JpaRepository<Product, Long> {
     Product save(Product product);
     Product findProductById(Long Id);
-    Product findByPriceBetween(double greaterthan, double lessthan);
+    Product findByPriceBetween(double greater_than, double less_than);
     //Product findByProductName(String productName);
 
    // String findTitleById(Long id);

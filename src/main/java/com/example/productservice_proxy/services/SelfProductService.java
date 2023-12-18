@@ -4,6 +4,7 @@ import com.example.productservice_proxy.models.Product;
 import com.example.productservice_proxy.repositories.ProductRepo;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 @Service
 public class SelfProductService implements ProductServiceInterface{
@@ -13,7 +14,10 @@ public class SelfProductService implements ProductServiceInterface{
     }
     @Override
     public List<Product> getAllProducts() {
-        return null;
+        //By Anitha
+        List<Product> products = new ArrayList<>();
+        products=this.productRepo.findAll();
+        return products;
     }
 
     @Override

@@ -14,10 +14,12 @@ import java.util.List;
 @Getter
 @Setter
 @Entity
-public class Categories extends BaseModel{
+public class   Categories extends BaseModel{
     private String name;
     private String description;
     @OneToMany(mappedBy = "category", fetch = FetchType.LAZY)
     @Fetch(FetchMode.SUBSELECT)
     private List<Product> productList;
+
 }
+//Mapped is available for one to one, one to many and many to many

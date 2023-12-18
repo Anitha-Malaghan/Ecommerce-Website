@@ -9,10 +9,11 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface CategoryRepo extends JpaRepository<Categories, Long> {
     Categories save(Categories categories);
+
     Categories findById(long id);
 
 
-    //custom queries
+    //these are custom queries
     @Query(value = "SELECT c.name FROM Categories c WHERE c.id= :id")
     String findCategoryNameById(@Param("id") long id);
     //Another way
