@@ -20,7 +20,7 @@ public class SearchService {
     public List<Product> searchProducts(String query, int pageNumber, int sizeOfPage){
         //who is passing the pageable to the repository: service
             //return productRepo.findByTitle(query);
-            return productRepo.findByTitleEquals(query, PageRequest.of(pageNumber, sizeOfPage));
+            return productRepo.findByTitleEquals(query, pageable(PageRequest.of(pageNumber, sizeOfPage)));
     }
 
 }
